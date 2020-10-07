@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var news = require('../model/new');
 
-mongoose.connect('mongodb://106.55.12.105:31212/test', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://lazygang:lzg2752309@106.55.12.105:31212/test?authSource=admin', { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.connection.on('connected', function () {
     console.log('connected');
