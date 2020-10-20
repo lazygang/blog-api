@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+var mongoose = require("mongoose");
 /**
  * Module dependencies.
  */
@@ -88,3 +88,8 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+mongoose.connect(
+  "mongodb://lazygang:lzg2752309@106.55.12.105:31212/blog?authSource=admin",
+  { useNewUrlParser: true, useUnifiedTopology: true }
+);

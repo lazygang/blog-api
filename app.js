@@ -5,12 +5,13 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
 const JwtUtil = require("./jwt");
-
+var moment = require("moment");
+moment.locale('zh-cn')
 var indexRouter = require("./routes/index");
 // var usersRouter = require('./routes/users');
 var newsRouter = require("./routes/news");
 var guestRouter = require("./routes/guest");
-var userRouter = require("./routes/user");
+var userRouter = require("./routes/users");
 const { token } = require("morgan");
 
 var app = express();
@@ -27,7 +28,7 @@ app.all("*", function (req, res, next) {
 
 app.use(function (req, res, next) {
   // token验证
-  if (req.url != "/user/login" && req.url != "/user/register") {
+  if (req.url != "/users/login" && req.url != "/users/register") {
     let token = req.headers.token;
     let jwt = new JwtUtil(token);
     let result = jwt.verifyToken();
@@ -63,7 +64,7 @@ app.use("/", indexRouter);
 // app.use('/users', usersRouter);
 app.use("/news", newsRouter);
 app.use("/guest", guestRouter);
-app.use("/user", userRouter);
+app.use("/users", userRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

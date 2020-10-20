@@ -1,12 +1,12 @@
 var mongoose=require('mongoose');
 var Schema=mongoose.Schema;
 var api=new Schema({
-	// //这里根据你的数据库的内容来更改
-	// "goodId" : Number, 
-    // "goodName" : Number, 
-    // "goodPrice":Number,
-    // name : String, 
-    // age : String,
-    // title:String
+// 添加数据需验证
+    name:String,
+    passWord:String,
+    nickName:String,
+    level:String,
+    createTime:String,
+    head:String,
 });
-module.exports=mongoose.model('user',api);
+module.exports=mongoose.model('users',api);
