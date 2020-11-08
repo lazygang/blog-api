@@ -6,7 +6,7 @@ var moment = require("moment");
 const JwtUtil = require("../jwt");
 
 mongoose.connection.on("connected", function () {
-  console.log("connected");
+  console.log("users");
 });
 // 登录验证接口
 router.post("/login", function (req, res) {
@@ -54,7 +54,6 @@ router.post("/register", function (req, res) {
         data: null,
       });
     } else {
-      console.log(data);
       res.json({
         success: 1,
         data: data,

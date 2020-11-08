@@ -12,6 +12,7 @@ var indexRouter = require("./routes/index");
 var newsRouter = require("./routes/news");
 var guestRouter = require("./routes/guest");
 var userRouter = require("./routes/users");
+var dailysRouter = require("./routes/dailys");
 const { token } = require("morgan");
 
 var app = express();
@@ -25,6 +26,10 @@ app.all("*", function (req, res, next) {
   res.header("Access-Control-Expose-Headers", "*");
   next();
 });
+// 限制上传大小
+// var bodyParser = require('body-parser');
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.use(function (req, res, next) {
   // token验证
@@ -57,14 +62,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 
 app.use("/", indexRouter);
 // app.use('/users', usersRouter);
 app.use("/news", newsRouter);
 app.use("/guest", guestRouter);
 app.use("/users", userRouter);
+app.use("/dailys", dailysRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
