@@ -57,8 +57,19 @@ router.post("/add", async (req, res) => {
     }
   });
 });
+//获取内容总数
+
 // 分页查询内容
-router.post("/getContent", function (req, res) {
+router.post("/getContent",async function (req, res) {
+  let contentTotal;
+ await dailys
+    .find({}, function (err, count) {
+      if (!err) {
+        contentTotal = count;
+        console.log(count);
+      }
+    })
+    .count();
   dailys
     .find({}, function (err, doc) {
       if (err) {
@@ -70,6 +81,7 @@ router.post("/getContent", function (req, res) {
         res.json({
           success: 1,
           data: doc,
+          total: contentTotal,
         });
       }
     })
